@@ -13,6 +13,8 @@
       $this->setGenre($_genre);
     }
 
+
+    //? Metodi SET
     public function setTitle($_title){
       $this->title = $_title;
     }
@@ -25,6 +27,22 @@
     public function setGenre($_genre){
       $this->genre = $_genre;
     }
+    //? /Metodi SET
+
+    //? Metodi GET
+    public function getTitle(){
+      return $this->title;
+    }
+    public function getDesc(){
+      return $this->desc;
+    }
+    public function getYear(){
+      return $this->year;
+    }
+    public function getGenre(){
+      return $this->genre;
+    }
+    //? /Metodi GET
 
   }
 ?>

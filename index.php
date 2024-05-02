@@ -1,18 +1,22 @@
 <?php 
 
 require_once __DIR__ . '/Model/Movie.php';
+require_once __DIR__ . '/Model/db.php';
 
-$movie1 = new Movie('Matrix', 'Thomas Anderson lavora presso la Metacortex come programmatore di software. Di giorno è un cittadino modello, mentre di notte assume la veste di hacker: sotto lo pseudonimo di "Neo" ha compiuto innumerevoli illeciti in campo informatico. Per questo motivo è sorvegliato dagli agenti Smith, Brown e Jones. I tre lo arrestano e gli viene inserita una cimice nel corpo per seguirlo.', 1999, ['azione']);
+// Creo le istanze
+$myFilms = [];
 
-$movie2 = new Movie('Ritorno al futuro', 'Hill Valley, California, 25 ottobre 1985. Marty McFly è un diciassettenne studente di liceo, pigro e spesso ritardatario, ma coraggioso, gentile e di buon cuore, fidanzato con Jennifer Parker, sua coetanea e compagna di scuola. Marty sogna di diventare una rockstar ed è il chitarrista in un gruppo rock amatoriale, pur senza molta fortuna: il gruppo viene infatti bocciato al provino per suonare al ballo della scuola, perché i docenti ritengono Marty e il suo gruppo "troppo rumorosi". ', 1996, ['fantascienza']);
+foreach($films as $films){
+  $film = new Movie($films['title'], $films['desc'], $films['year'], $films['genre']);
+  $myFilms[] = $film;
+}
 
-$movie3 = new Movie('Lo Hobbit - Un viaggio inaspettato', 'Poco prima dell\'inizio dei fatti narrati ne Il Signore degli Anelli, l\'anziano Bilbo Baggins è intento a scrivere le sue memorie nel Libro Rosso, in modo che suo nipote Frodo possa conoscere tutte le sue avventure. Nelle prime pagine del suo racconto, il vecchio hobbit comincia a narrare la storia del regno di Erebor, roccaforte del re dei nani Thrór, e delle immense ricchezze qui conservate. Il regno di Thrór vive un lungo periodo di prosperità, fino all\'arrivo del terrificante drago Smaug, il quale, invaghitosi del tesoro di Erebor, dopo aver attaccato la vicina città di Dale, che viveva di riflesso il benessere del regno dei Nani, raggiunge il regno di Thrór e lo conquista, costringendo i nani alla fuga. Quel giorno, gli elfi del Reame Boscoso decisero di non aiutare Thrór in quanto il loro re, Thranduil, non avrebbe rischiato la vita dei suoi contro l\'ira del drago. ', 1996, ['epico', 'fantastico', 'avventura']);
+// var_dump($myFilms);
 
 
-
-var_dump($movie1);
-var_dump($movie2);
-var_dump($movie3);
+// var_dump($movie1);
+// var_dump($movie2);
+// var_dump($movie3);
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +32,36 @@ var_dump($movie3);
 </head>
 <body>
   <div class="container my-5">
+    <h1 class="text-center title my-5 ">myMovies</h1>
+
+    <div class="row row-cols-2 ">
+      <!-- Stampo dinamicamente i film -->
+      <?php foreach($myFilms as $film): ?>
+      <div class="col p-3 ">
+        <div class="my-card m-1 p-3">
+          <!-- TITOLO -->
+          <h5><?php echo $film->title ?></h5>
+          <!-- DESCRIZIONE -->
+          <p class="my-2">
+            <?php echo $film->desc ?>
+          </p>
+          <!-- ANNO -->
+          <p class="my-2">
+            <?php echo $film->year ?>
+          </p>
+          <!-- GENERI -->
+          <p class="my-2">
+            <?php foreach($film->genre as $genre): ?>
+            <span class="me-3">
+              <?php echo $genre ?>
+            </span>
+            <?php endforeach ?>
+          </p>
+        </div>
+
+      </div>
+      <?php endforeach ?>
+    </div>
   </div>
 </body>
 </html>
